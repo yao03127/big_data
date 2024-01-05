@@ -72,7 +72,7 @@ def aggregated_map_2021():
     area_crime_counts = data_2021.groupby('AREA NAME').size().reset_index(name='Crime Count')
     # Merging with the original data to get the latitude and longitude for each area
     # Here, we use the mean latitude and longitude for each area
-    area_location = data_2021.groupby('AREA NAME')['LAT', 'LON'].mean().reset_index()
+    area_location = data_2021.groupby('AREA NAME')[['LAT', 'LON']].mean().reset_index()
     aggregated_data = pd.merge(area_crime_counts, area_location, on='AREA NAME')
     # Create a map
     aggregated_map_2021 = folium.Map(location=[mean_lat, mean_lon], zoom_start=10)
@@ -95,7 +95,7 @@ def aggregated_map_2022():
     area_crime_counts = data_2022.groupby('AREA NAME').size().reset_index(name='Crime Count')
     # Merging with the original data to get the latitude and longitude for each area
     # Here, we use the mean latitude and longitude for each area
-    area_location = data_2022.groupby('AREA NAME')['LAT', 'LON'].mean().reset_index()
+    area_location = data_2022.groupby('AREA NAME')[['LAT', 'LON']].mean().reset_index()
     aggregated_data = pd.merge(area_crime_counts, area_location, on='AREA NAME')
     # Create a map
     aggregated_map_2022 = folium.Map(location=[mean_lat, mean_lon], zoom_start=10)
@@ -118,7 +118,7 @@ def aggregated_map_2023():
     area_crime_counts = data_2023.groupby('AREA NAME').size().reset_index(name='Crime Count')
     # Merging with the original data to get the latitude and longitude for each area
     # Here, we use the mean latitude and longitude for each area
-    area_location = data_2023.groupby('AREA NAME')['LAT', 'LON'].mean().reset_index()
+    area_location = data_2023.groupby('AREA NAME')[['LAT', 'LON']].mean().reset_index()
     aggregated_data = pd.merge(area_crime_counts, area_location, on='AREA NAME')
     # Create a map
     aggregated_map_2023 = folium.Map(location=[mean_lat, mean_lon], zoom_start=10)
