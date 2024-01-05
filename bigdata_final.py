@@ -7,7 +7,7 @@ import streamlit_folium as st_folium
 from folium.plugins import MarkerCluster
 
 
-@st.cache_data
+@st.experimental_memo
 def load_data(file_name):
     data = pd.read_csv(file_name)
     data = data.dropna()
