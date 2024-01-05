@@ -17,7 +17,7 @@ data_2021 = load_data("LA_Crime_Data_2021.csv")
 data_2022 = load_data("LA_Crime_Data_2022.csv")
 data_2023 = load_data("LA_Crime_Data_2023.csv")
 
-@st.cache_data
+@st.experimental_memo
 def map_2021():
     #2021_犯罪地區分布(隨機抽查30000)
     # Randomly sample a small portion of the data to avoid performance issues
@@ -32,7 +32,7 @@ def map_2021():
         folium.Marker(location=[row['LAT'], row['LON']]).add_to(marker_cluster)
     st_folium.folium_static(map_2021)
 
-@st.cache_data
+@st.experimental_memo
 def map_2022():
     #2022_犯罪地區分布(隨機抽查30000)
     # Randomly sample a small portion of the data to avoid performance issues
@@ -47,7 +47,7 @@ def map_2022():
         folium.Marker(location=[row['LAT'], row['LON']]).add_to(marker_cluster)
     st_folium.folium_static(map_2022)
 
-@st.cache_data
+@st.experimental_memo
 def map_2023():
     #2023_犯罪地區分布(隨機抽查30000)
     # Randomly sample a small portion of the data to avoid performance issues
@@ -62,7 +62,7 @@ def map_2023():
         folium.Marker(location=[row['LAT'], row['LON']]).add_to(marker_cluster)
     st_folium.folium_static(map_2023)
 
-@st.cache_data
+@st.experimental_memo
 def aggregated_map_2021():
     #2021_犯罪地區分布(各區總計)
     # Recalculating the mean latitude and longitude
@@ -85,7 +85,7 @@ def aggregated_map_2021():
     ).add_to(aggregated_map_2021)
     st_folium.folium_static(aggregated_map_2021)
 
-@st.cache_data
+@st.experimental_memo
 def aggregated_map_2022():
     #2022_犯罪地區分布(各區總計)
     # Recalculating the mean latitude and longitude
@@ -108,7 +108,7 @@ def aggregated_map_2022():
     ).add_to(aggregated_map_2022)
     st_folium.folium_static(aggregated_map_2022)
 
-@st.cache_data
+@st.experimental_memo
 def aggregated_map_2023():
     #2023_犯罪地區分布(各區總計)
     # Recalculating the mean latitude and longitude
@@ -131,7 +131,7 @@ def aggregated_map_2023():
     ).add_to(aggregated_map_2023)
     st_folium.folium_static(aggregated_map_2023)
 
-@st.cache_data
+@st.experimental_memo
 def fig_2021():
     #2021_犯罪數趨勢圖
     # 確保 'DATE OCC' 是 datetime 類型
@@ -145,7 +145,7 @@ def fig_2021():
     fig_2021.update_yaxes(title_text='Number of Crimes')
     st.plotly_chart(fig_2021)
 
-@st.cache_data
+@st.experimental_memo
 def fig_2022():
     #2022_犯罪數趨勢圖
     # 確保 'DATE OCC' 是 datetime 類型
@@ -159,7 +159,7 @@ def fig_2022():
     fig_2022.update_yaxes(title_text='Number of Crimes')
     st.plotly_chart(fig_2022)
 
-@st.cache_data
+@st.experimental_memo
 def fig_2023():
     #2023_犯罪數趨勢圖
     # 確保 'DATE OCC' 是 datetime 類型
@@ -173,7 +173,7 @@ def fig_2023():
     fig_2023.update_yaxes(title_text='Number of Crimes')
     st.plotly_chart(fig_2023)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2021():
     #2021_依照日期_受害人性別
     # 確保 'DATE OCC' 是 datetime 類型
@@ -186,7 +186,7 @@ def sex_2021():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Victims', 'Vict Sex': 'Victim Sex'})
     st.plotly_chart(sex_2021)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2022():
     #2022_依照日期_受害人性別
     # 確保 'DATE OCC' 是 datetime 類型
@@ -199,7 +199,7 @@ def sex_2022():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Victims', 'Vict Sex': 'Victim Sex'})
     st.plotly_chart(sex_2022)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2023():
     #2023_依照日期_受害人性別
     # 確保 'DATE OCC' 是 datetime 類型
@@ -212,7 +212,7 @@ def sex_2023():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Victims', 'Vict Sex': 'Victim Sex'})
     st.plotly_chart(sex_2023)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2021_total():
     #2021_受害者性別總計
     # 統計受害者性別 (Vict Sex)
@@ -222,7 +222,7 @@ def sex_2021_total():
              labels={'x': 'Victim Sex', 'y': 'Count'}, title='Victim Sex Distribution')
     st.plotly_chart(sex_2021_total)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2022_total():
     #2022_受害者性別總計
     # 統計受害者性別 (Vict Sex)
@@ -232,7 +232,7 @@ def sex_2022_total():
              labels={'x': 'Victim Sex', 'y': 'Count'}, title='Victim Sex Distribution')
     st.plotly_chart(sex_2022_total)
 
-@st.cache_data
+@st.experimental_memo
 def sex_2023_total():
     #2023_受害者性別總計
     # 統計受害者性別 (Vict Sex)
@@ -242,7 +242,7 @@ def sex_2023_total():
              labels={'x': 'Victim Sex', 'y': 'Count'}, title='Victim Sex Distribution')
     st.plotly_chart(sex_2023_total)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2021():
     #2021_依照日期_受害事件
     # 確保 'DATE OCC' 是 datetime 類型
@@ -254,7 +254,7 @@ def Status_Desc_2021():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Status Desc', 'Status Desc': 'Status Desc'})
     st.plotly_chart(Status_Desc_2021)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2022():
     #2022_依照日期_受害事件
     # 確保 'DATE OCC' 是 datetime 類型
@@ -266,7 +266,7 @@ def Status_Desc_2022():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Status Desc', 'Status Desc': 'Status Desc'})
     st.plotly_chart(Status_Desc_2022)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2023():
     #2023_依照日期_受害事件
     # 確保 'DATE OCC' 是 datetime 類型
@@ -278,7 +278,7 @@ def Status_Desc_2023():
               labels={'DATE OCC': 'Date', 'Count': 'Number of Status Desc', 'Status Desc': 'Status Desc'})
     st.plotly_chart(Status_Desc_2023)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2021_total():
     #2021_受害事件總計
     vict_sex_counts_full = data_2021['Status Desc'].value_counts()
@@ -287,7 +287,7 @@ def Status_Desc_2021_total():
              labels={'x': 'Status Desc', 'y': 'Count'}, title= 'Status Desc Distribution')
     st.plotly_chart(Status_Desc_2021_total)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2022_total():
     #2022_受害事件總計
     vict_sex_counts_full = data_2022['Status Desc'].value_counts()
@@ -296,7 +296,7 @@ def Status_Desc_2022_total():
              labels={'x': 'Status Desc', 'y': 'Count'}, title='Status Desc Distribution')
     st.plotly_chart(Status_Desc_2022_total)
 
-@st.cache_data
+@st.experimental_memo
 def Status_Desc_2023_total():
     #2023_受害事件總計
     vict_sex_counts_full = data_2023['Status Desc'].value_counts()
@@ -305,7 +305,7 @@ def Status_Desc_2023_total():
              labels={'x': 'Victim Sex', 'y': 'Count'}, title='Status Desc Distribution')
     st.plotly_chart(Status_Desc_2023_total)
 
-@st.cache_data
+@st.experimental_memo
 def bar_age_2021():
     #2021_害者年齡區間
     age_bins = range(0, 120, 10)
@@ -319,7 +319,7 @@ def bar_age_2021():
     bar_age_2021.update_layout(title='Number of Crimes per Age Range in 2021', xaxis_title='Age Range', yaxis_title='Number of Crimes')
     st.plotly_chart(bar_age_2021)
 
-@st.cache_data
+@st.experimental_memo
 def bar_age_2022():
     #2022_受害者年齡區間
     age_bins = range(0, 120, 10)
@@ -333,7 +333,7 @@ def bar_age_2022():
     bar_age_2022.update_layout(title='Number of Crimes per Age Range in 2022', xaxis_title='Age Range', yaxis_title='Number of Crimes')
     st.plotly_chart(bar_age_2022)
 
-@st.cache_data
+@st.experimental_memo
 def bar_age_2023():
     #2023_受害者年齡區間
     age_bins = range(0, 120, 10)
@@ -347,7 +347,7 @@ def bar_age_2023():
     bar_age_2023.update_layout(title='Number of Crimes per Age Range in 2023', xaxis_title='Age Range', yaxis_title='Number of Crimes')
     st.plotly_chart(bar_age_2023)
 
-@st.cache_data
+@st.experimental_memo
 def line_age_2021():
     #2021_受害者年齡區間_依照日期
     # 確保日期和年齡字段的正確格式
@@ -360,7 +360,7 @@ def line_age_2021():
                    labels={'DATE OCC': 'Date of Occurrence', 'Vict Age': 'Average Victim Age'})
     st.plotly_chart(line_age_2021)
 
-@st.cache_data
+@st.experimental_memo
 def line_age_2022():
     #2022_受害者年齡區間_依照日期
     # 確保日期和年齡字段的正確格式
@@ -373,7 +373,7 @@ def line_age_2022():
                    labels={'DATE OCC': 'Date of Occurrence', 'Vict Age': 'Average Victim Age'})
     st.plotly_chart(line_age_2022)
 
-@st.cache_data
+@st.experimental_memo
 def line_age_2023():
     #2023_受害者年齡區_依照日期
     # 確保日期和年齡字段的正確格式
