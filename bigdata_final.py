@@ -365,7 +365,7 @@ def line_age_2021():
     # Process 2021 data
     grouped_data_2021 = prepare_age_group_data(data_2021)
     # Create line chart
-    fig_2021 = px.bar(grouped_data_2021, x='DATE OCC', y='Count', color='Age Group', 
+    fig_2021 = px.line(grouped_data_2021, x='DATE OCC', y='Count', color='Age Group', 
                        title='2021 Victim Count by Age Group and Date',
                        labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
     st.plotly_chart(fig_2021)
@@ -375,7 +375,7 @@ def line_age_2022():
     # Process 2022 data
     grouped_data_2022 = prepare_age_group_data(data_2022)
     # Create line chart
-    fig_2022 = px.bar(grouped_data_2022, x='DATE OCC', y='Count', color='Age Group', 
+    fig_2022 = px.line(grouped_data_2022, x='DATE OCC', y='Count', color='Age Group', 
                        title='2022 Victim Count by Age Group and Date',
                        labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
     st.plotly_chart(fig_2022)
@@ -385,7 +385,7 @@ def line_age_2023():
     # Process 2023 data
     grouped_data_2023 = prepare_age_group_data(data_2023)
     # Create line chart
-    fig_2023 = px.bar(grouped_data_2023, x='DATE OCC', y='Count', color='Age Group', 
+    fig_2023 = px.line(grouped_data_2023, x='DATE OCC', y='Count', color='Age Group', 
                        title='2023 Victim Count by Age Group and Date',
                        labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
     st.plotly_chart(fig_2023)
