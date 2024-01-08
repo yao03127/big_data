@@ -347,44 +347,48 @@ def bar_age_2023():
     bar_age_2023.update_layout(title='Number of Crimes per Age Range in 2023', xaxis_title='Age Range', yaxis_title='Number of Crimes')
     st.plotly_chart(bar_age_2023)
 
+def prepare_age_group_data(data):
+    data['DATE OCC'] = pd.to_datetime(data['DATE OCC'])
+    data['Vict Age'] = pd.to_numeric(data['Vict Age'], errors='coerce')  # Convert to numeric, non-numeric to NaN
+
+    # Create age bins
+    bins = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90-99']
+    data['Age Group'] = pd.cut(data['Vict Age'], bins=bins, labels=labels, right=False)
+
+    # Group by date and age group
+    grouped_data = data.groupby(['DATE OCC', 'Age Group']).size().reset_index(name='Count')
+    return grouped_data
+
 @st.experimental_memo
 def line_age_2021():
-    #2021_受害者年齡區間_依照日期
-    # 確保日期和年齡字段的正確格式
-    data_2021['DATE OCC'] = pd.to_datetime(data_2021['DATE OCC'])
-    data_2021['Vict Age'] = pd.to_numeric(data_2021['Vict Age'], errors='coerce')  # 轉換為數字，非數字轉為 NaN
-    # 計算每個日期的受害者平均年齡
-    average_age_by_date = data_2021.groupby('DATE OCC')['Vict Age'].mean().reset_index()
-    # 創建折線圖
-    line_age_2021 = px.line(average_age_by_date, x='DATE OCC', y='Vict Age', title='Average Victim Age by Date',
-                   labels={'DATE OCC': 'Date of Occurrence', 'Vict Age': 'Average Victim Age'})
-    st.plotly_chart(line_age_2021)
+    # Process 2021 data
+    grouped_data_2021 = prepare_age_group_data(data_2021)
+    # Create line chart
+    fig_2021 = px.line(grouped_data_2021, x='DATE OCC', y='Count', color='Age Group', 
+                       title='2021 Victim Count by Age Group and Date',
+                       labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
+    st.plotly_chart(fig_2021)
 
 @st.experimental_memo
 def line_age_2022():
-    #2022_受害者年齡區間_依照日期
-    # 確保日期和年齡字段的正確格式
-    data_2022['DATE OCC'] = pd.to_datetime(data_2022['DATE OCC'])
-    data_2022['Vict Age'] = pd.to_numeric(data_2022['Vict Age'], errors='coerce')  # 轉換為數字，非數字轉為 NaN
-    # 計算每個日期的受害者平均年齡
-    average_age_by_date = data_2022.groupby('DATE OCC')['Vict Age'].mean().reset_index()
-    # 創建折線圖
-    line_age_2022 = px.line(average_age_by_date, x='DATE OCC', y='Vict Age', title='Average Victim Age by Date',
-                   labels={'DATE OCC': 'Date of Occurrence', 'Vict Age': 'Average Victim Age'})
-    st.plotly_chart(line_age_2022)
+    # Process 2022 data
+    grouped_data_2022 = prepare_age_group_data(data_2022)
+    # Create line chart
+    fig_2022 = px.line(grouped_data_2022, x='DATE OCC', y='Count', color='Age Group', 
+                       title='2022 Victim Count by Age Group and Date',
+                       labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
+    st.plotly_chart(fig_2022)
 
 @st.experimental_memo
 def line_age_2023():
-    #2023_受害者年齡區_依照日期
-    # 確保日期和年齡字段的正確格式
-    data_2023['DATE OCC'] = pd.to_datetime(data_2023['DATE OCC'])
-    data_2023['Vict Age'] = pd.to_numeric(data_2023['Vict Age'], errors='coerce')  # 轉換為數字，非數字轉為 NaN
-    # 計算每個日期的受害者平均年齡
-    average_age_by_date = data_2023.groupby('DATE OCC')['Vict Age'].mean().reset_index()
-    # 創建折線圖
-    line_age_2023 = px.line(average_age_by_date, x='DATE OCC', y='Vict Age', title='Average Victim Age by Date',
-                   labels={'DATE OCC': 'Date of Occurrence', 'Vict Age': 'Average Victim Age'})
-    st.plotly_chart(line_age_2023)
+    # Process 2023 data
+    grouped_data_2023 = prepare_age_group_data(data_2023)
+    # Create line chart
+    fig_2023 = px.line(grouped_data_2023, x='DATE OCC', y='Count', color='Age Group', 
+                       title='2023 Victim Count by Age Group and Date',
+                       labels={'DATE OCC': 'Date of Occurrence', 'Count': 'Victim Count'})
+    st.plotly_chart(fig_2023)
 
 # Streamlit介面         
 #狀態列
